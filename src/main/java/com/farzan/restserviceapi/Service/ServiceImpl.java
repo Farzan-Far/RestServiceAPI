@@ -13,11 +13,11 @@ import java.util.Optional;
 @Service
 public class ServiceImpl implements UserService
 {
-    private final repository repository;
+    private final repository repo;
+
     @Autowired
-    public ServiceImpl(com.farzan.restserviceapi.Repository.repository repository)
-    {
-        this.repository = repository;
+    public ServiceImpl(repository repo) {
+        this.repo = repo;
     }
 
     @Override
@@ -30,20 +30,20 @@ public class ServiceImpl implements UserService
         user.setPassNumber(request.getPassNumber());
         user.setCountry(request.getCountry());
 
-        repository.save(user);
+        repo.save(user);
         return new Response("New User is Registered.");
     }
 
     @Override
     public List<User> getAllUser()
     {
-        return repository.findAll();
+        return repo.findAll();
     }
 
     @Override
     public Optional<User> findByPassNumber(String passNumber)
     {
-        return repository.findById(passNumber);
+        return repo.findById(passNumber);
     }
 
 }
