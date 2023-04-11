@@ -1,45 +1,30 @@
-package com.farzan.restserviceapi.Domain;
+package com.farzan.restserviceapi.DataModels;
 
-import javax.persistence.*;
+import com.farzan.restserviceapi.Domain.Country;
 
-@Entity
-public class User
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+public class Request
 {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id=1;
+    private Integer id;
     private String name;
     private String family;
-    @Id
     private String passNumber;
 
     @Enumerated(EnumType.STRING)
     private Country country;
 
-    public User()
-    {
-    }
-
     @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
+    public String toString()
+    {
+        return "Request {" +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", family='" + family + '\'' +
                 ", passNumber='" + passNumber + '\'' +
                 ", country=" + country +
                 '}';
-    }
-
-    public User(String passNumber)
-    {
-        this.passNumber = passNumber;
-    }
-
-    public User(Integer id, String name, String family, String passNumber, Country country) {
-        this.id = id;
-        this.name = name;
-        this.family = family;
-        this.passNumber = passNumber;
-        this.country = country;
     }
 
     public Integer getId() {
