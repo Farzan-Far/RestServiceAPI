@@ -15,9 +15,12 @@ import java.util.Optional;
 @RequestMapping("/user")
 public class MainController
 {
+    private final  ServiceImpl service;
     @Autowired
-    ServiceImpl service;
-    Request request;
+    public MainController(ServiceImpl service) {
+        this.service = service;
+    }
+
     @PostMapping("/add")
     public ResponseEntity<Response> response(@RequestBody Request request)
     {
@@ -25,47 +28,13 @@ public class MainController
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
 
-  /*  @PostMapping("/find")
-    public ResponseEntity<User> getUserById(@PathVariable("passNumber") String passNumber) throws Exception
-    {
-        User user = service.getAUSer(passNumber);
-        return new ResponseEntity<>(user,HttpStatus.FOUND);
-    }*/
-
-   /* @PostMapping("/find")
-    public ResponseEntity<User> getUser(@PathVariable("passNumber")String passNumber)
-            throws Exception
-    {
-        Optional<User> user1 = service.findByPassNumber(passNumber);
-        if (user1.isPresent())
-        {
-            return new ResponseEntity<>(user1.get(),HttpStatus.FOUND);
-        }
-
-        else {
-            throw new Exception();
-        }
-    }*/
-
     @PostMapping("/find")
     public Optional<User> findUser(@RequestBody Request request)
     {
-//       System.out.println("I am inside of find service");
         Optional<User> user = service.findByPassNumber(String.valueOf(request.getPassNumber()));
-//        User obj = user.get();
-//        System.out.println(obj.getPassNumber());
 
-//        System.out.println("Pass Number : " + user.get());
         return user;
     }
 
-   /* @PostMapping("/find")
-    public Optional<User> findUser(String passNumber)
-    {
-    Optional<User> request = service.findByPassNumber(passNumber);
-
-    return request;
-
-    }*/
 
 }
